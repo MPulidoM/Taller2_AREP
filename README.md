@@ -33,7 +33,7 @@ Para poder ver el funcionamiento de este taller , en si instalar este programa, 
 ```
 $ git clone https://github.com/MPulidoM/Taller2_AREP.git
 ```
-Para poder ver la aplicación web , se debe inicar en el IDE Utilizado el [HttpServerTest](https://github.com/MPulidoM/Taller2_AREP/blob/main/Taller2_AREP/src/test/java/edu/escuelaing/arem/ASE/app/HttpServerTest.java). Lo siguiente es abrir el navegador , en el caso de este taller se trabajo más que todo en Google, y poner en el siguiente 
+Para poder ver la aplicación web , se debe inicar en el IDE Utilizado el  [HttpServer](https://github.com/MPulidoM/Taller2_AREP/blob/main/Taller2_AREP/src/main/java/edu/escuelaing/arem/ASE/app/HttpServer.java).. Lo siguiente es abrir el navegador , en el caso de este taller se trabajo más que todo en Google, y poner en el siguiente 
 ```
 localhost:35000
 ```
