@@ -55,7 +55,7 @@ Este servidor HTTP simple en Java maneja cargas de archivos con el método POST 
 
 ## Pruebas Realizadas
 
---> Al seleccionar el archivo en el primer                                                                                                                                          
+--> Al seleccionar el archivo en el primer botón  consiguiente debes darle al botón el cuál se encuentra por consiguiente para viasulizarlo(En ocasiones debes dar doble clik):                                                                                                                                        
 
 - Como se ve la pagina:
   ![](Imagenes/P1.png)
