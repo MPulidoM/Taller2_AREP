@@ -64,7 +64,7 @@ public class HttpServer {
                 }
             }
             if (uriS.startsWith("/upload")) {
-                outputLine = findBoundaries(uriWithFileName);
+                outputLine = extractFileContentFromInput(uriWithFileName);
             } else {
                 outputLine = getHomeIndex();
             }
@@ -75,8 +75,14 @@ public class HttpServer {
         }
         serverSocket.close();
     }
+    /**
+     * Extrae el contenido del archivo de una cadena de entrada, manejando diferentes tipos de archivos y devolviendo respuestas HTTP apropiadas.
+     *
+     * @param inputString La cadena de entrada que contiene el nombre del archivo y los límites potenciales.
+     * @return El contenido del archivo como una respuesta HTTP, o "404" si el archivo no se encuentra o hay un error.
+     */
 
-    public static String findBoundaries(String inputString) {
+    public static String extractFileContentFromInput(String inputString) {
         String filename = null;
 
         // Extract the filename from the input string
@@ -102,6 +108,13 @@ public class HttpServer {
         // Handle the case where the file is not found or there's an error
         return "404";
     }
+    /**
+     * Recupera el contenido de un archivo en función de su tipo, convirtiéndolo en una respuesta HTTP apropiada.
+     *
+     * @param filename El nombre del archivo a recuperar.
+     * @param path La ruta al directorio que contiene el archivo.
+     * @return El contenido del archivo como una respuesta HTTP, o "404" si el archivo no se encuentra o hay un error.
+     */
 
     public static String getTheFileContent(String filename, String path) {
         String completePath = path + filename;
@@ -138,14 +151,25 @@ public class HttpServer {
 
         return "404";
     }
-
+    /**
+     * Obtiene la extensión del archivo a partir de un nombre de archivo.
+     *
+     * @param filename El nombre del archivo del que se extrae la extensión.
+     * @return La extensión del archivo, o una cadena vacía si no se encuentra ninguna extensión.
+     */
     private static String getFileExtension(String filename) {
         int extensionIndex = filename.lastIndexOf(".");
         return extensionIndex != -1 ? filename.substring(extensionIndex + 1) : "";
     }
 
-
-
+    /**
+     * Convierte un archivo de imagen a una respuesta HTTP con codificación Base64.
+     *
+     * @param file El archivo de imagen a convertir.
+     * @param type El tipo de imagen (por ejemplo, "jpg", "png").
+     * @return La respuesta HTTP que contiene los datos de la imagen codificados en Base64.
+     * @throws IOException Si hay un error al leer el archivo.
+     */
 
     public static String toImage(File file, String type) throws IOException{
         byte[] bytes = Files.readAllBytes(file.toPath());
@@ -155,7 +179,13 @@ public class HttpServer {
                 + "\r\n"
                 + "<center><img src=\"data:image/" + type + ";base64," + base64 + "\"></center>";
     }
-
+    /**
+     * Convierte un archivo HTML a una respuesta HTTP.
+     *
+     * @param file El archivo HTML a convertir.
+     * @return La respuesta HTTP que contiene el contenido HTML.
+     * @throws IOException Si hay un error al leer el archivo.
+     */
     public static String toHTML(File file) throws IOException {
         StringBuilder body = fromArchiveToString(file);
         return "HTTP/1.1 200 OK\r\n"
@@ -164,6 +194,13 @@ public class HttpServer {
                 + "<center>" + body + "</center>";
     }
 
+    /**
+     * Convierte un archivo CSS a una respuesta HTTP.
+     *
+     * @param file El archivo CSS a convertir.
+     * @return La respuesta HTTP que contiene el contenido CSS.
+     * @throws IOException Si hay un error al leer el archivo.
+     */
     public static String toCSS(File file) throws IOException{
         StringBuilder body = fromArchiveToString(file);
         return "HTTP/1.1 200 OK\r\n"
@@ -172,6 +209,13 @@ public class HttpServer {
                 + "<center>"+body+"</center>";
     }
 
+    /**
+     * Convierte un archivo JavaScript a una respuesta HTTP.
+     *
+     * @param file El archivo JavaScript a convertir.
+     * @return La respuesta HTTP que contiene el contenido JavaScript.
+     * @throws IOException Si hay un error al leer el archivo.
+     */
     public static String toJs(File file)throws IOException{
         StringBuilder body = fromArchiveToString(file);
         return "HTTP/1.1 200 OK\r\n"
@@ -179,11 +223,13 @@ public class HttpServer {
                 + "\r\n"
                 + "<center>"+body+"</center>";
     }
+
     /**
-     * This method re write the file into a line by line String Builder
-     * @param file
-     * @return the file components in a StringBuilder
-     * @throws IOException
+     * Lee un archivo línea por línea y devuelve su contenido como un StringBuilder.
+     *
+     * @param file El archivo a leer.
+     * @return Un StringBuilder que contiene el contenido del archivo.
+     * @throws IOException Si hay un error al leer el archivo.
      */
     public static StringBuilder fromArchiveToString(File file) throws IOException{
         StringBuilder body = new StringBuilder();
@@ -200,6 +246,11 @@ public class HttpServer {
         return body;
     }
 
+    /**
+     * Genera el contenido HTML para la página de inicio, incluyendo un formulario de carga de archivos.
+     *
+     * @return El contenido HTML para la página de inicio como una respuesta HTTP.
+     */
     public static String getHomeIndex() {
         return "HTTP/1.1 200 OK\r\n"
                 + "Content-Type: text/html\r\n"
