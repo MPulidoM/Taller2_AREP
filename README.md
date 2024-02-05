@@ -55,6 +55,8 @@ Este servidor HTTP simple en Java maneja cargas de archivos con el método POST 
 
 ## Pruebas Realizadas
 
+--> Al seleccionar el archivo en el primer                                                                                                                                          
+
 - Como se ve la pagina:
   ![](Imagenes/P1.png)
 - Prueba con Imágenes:
