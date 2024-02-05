@@ -56,11 +56,18 @@ Este servidor HTTP simple en Java maneja cargas de archivos con el método POST 
 ## Pruebas Realizadas
 
 - Como se ve la pagina:
+  ![](Imagenes/P1.png)
 - Prueba con Imágenes:
+ ![](Imagenes/IM1.png)
+ ![](Imagenes/IM2.png)
 - Prueba HTML:
+ ![](Imagenes/HTML.png)
 - Prueba Java Script:
+ ![](Imagenes/JS.png)
 - Prueba TXT:
-- Prueba Css:
+ ![](Imagenes/TXT.png)
+- Prueba Css
+ ![](Imagenes/CSS.png)
   
 
 
